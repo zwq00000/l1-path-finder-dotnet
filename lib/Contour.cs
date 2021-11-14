@@ -4,15 +4,15 @@ using NumSharp;
 
 namespace L1PathFinder {
   internal class Segment {
-    public double start;
-    public double end;
+    public int start;
+    public int end;
     public bool direction;
-    public double height;
+    public int height;
     public bool visited;
     public Segment next;
     public Segment prev;
 
-    public Segment (double start, double end, bool direction, double height) {
+    public Segment (int start, int end, bool direction, int height) {
       this.start = start;
       this.end = end;
       this.direction = direction;
@@ -23,19 +23,19 @@ namespace L1PathFinder {
     }
   }
   internal class ContourVertex : IPoint {
-    public double x;
-    public double y;
+    public int x;
+    public int y;
     public Segment segment;
     public int orientation;
-    public ContourVertex (double x, double y, Segment segment, int orientation) {
+    public ContourVertex (int x, int y, Segment segment, int orientation) {
       this.x = x;
       this.y = y;
       this.segment = segment;
       this.orientation = orientation;
     }
 
-    double IPoint.x => this.x;
-    double IPoint.y => this.y;
+    int IPoint.x => this.x;
+    int IPoint.y => this.y;
   }
 
   internal class Contour {

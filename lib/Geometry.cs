@@ -61,7 +61,7 @@ namespace L1PathFinder {
       return Math.Sign (a.y - b.y);
     }
     public static Geometry CreateGeometry (NDArray<int> grid) {
-      var loops = Contour.GetContours (grid.transpose(), false);
+      var loops = Contour.GetContours (grid.transpose (), false);
 
       //Extract corners
       var corners = new List<IPoint> ();
@@ -72,19 +72,19 @@ namespace L1PathFinder {
           var b = polygon[i];
           var c = polygon[(i + 1) % polygon.Count];
           if (Orientation.Orient (a, b, c) > 0) {
-            double x = 0, y = 0;
+            int x = 0, y = 0;
             if (b.x - a.x != 0) {
               x = b.x - a.x;
             } else {
               x = b.x - c.x;
             }
-            x = b.x + Math.Min ((int) Math.Round (x / Math.Abs (x)), 0);
+            x = b.x + Math.Min ((int) Math.Round ((double) x / Math.Abs (x)), 0);
             if (b.y - a.y != 0) {
               y = b.y - a.y;
             } else {
               y = b.y - c.y;
             }
-            y = b.y + Math.Min ((int) Math.Round (y / Math.Abs (y)), 0);
+            y = b.y + Math.Min ((int) Math.Round ((double) y / Math.Abs (y)), 0);
             var offset = new Vertex (x, y);
 
             if (offset.x >= 0 && offset.x < grid.shape[0] &&

@@ -121,11 +121,7 @@ namespace L1PathFinder.Tests {
         public static NDArray<int> LoadMap (string mapFile) {
             using var reader = File.OpenText (mapFile);
             var line = reader.ReadLine ();
-            // if (line.Contains ("type octile")) {
             return ReadOctile (reader);
-            // } else {
-
-            // }
         }
 
         private static int[] ParseLines (IEnumerable<string> lines) {

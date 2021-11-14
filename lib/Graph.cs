@@ -42,7 +42,7 @@ namespace L1PathFinder {
       this.landmarkDist = Vertex.LANDMARK_DIST ();
     }
 
-    public Vertex AddVertex (double x, double y) {
+    public Vertex AddVertex (int x, int y) {
       var v = Vertex.CreateVertex (x, y);
       this.verts.Add (v);
       return v;

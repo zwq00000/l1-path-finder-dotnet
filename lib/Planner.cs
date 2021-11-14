@@ -40,7 +40,7 @@ namespace L1PathFinder {
   }
 
   internal class Partition {
-    public double x;
+    public int x;
     public List<IPoint> left;
     public List<IPoint> right;
     public List<IPoint> on;
@@ -61,7 +61,7 @@ namespace L1PathFinder {
       return Math.Sign (bucket.y0 - y);
     }
 
-    private static void ConnectList (List<Vertex> nodes, Geometry geom, Graph graph, bool target, double x, double y) {
+    private static void ConnectList (List<Vertex> nodes, Geometry geom, Graph graph, bool target, int x, double y) {
       for (var i = 0; i < nodes.Count; ++i) {
         var v = nodes[i];
         if (!geom.StabBox (v.x, v.y, x, y)) {
@@ -74,7 +74,7 @@ namespace L1PathFinder {
       }
     }
 
-    private static void ConnectNodes (Geometry geom, Graph graph, INode node, bool target, double x, double y) {
+    private static void ConnectNodes (Geometry geom, Graph graph, INode node, bool target, int x, double y) {
       //Mark target nodes
       while (node != null) {
         //Check leaf case
@@ -211,7 +211,7 @@ namespace L1PathFinder {
       return Math.Sign (a.x - b.x);
     }
 
-    private static Partition MakePartition (double x, List<IPoint> corners, Geometry geom, object edges) {
+    private static Partition MakePartition (int x, List<IPoint> corners, Geometry geom, object edges) {
       var left = new List<IPoint> ();
       var right = new List<IPoint> ();
       var on = new List<IPoint> ();
@@ -287,7 +287,7 @@ namespace L1PathFinder {
         return verts[point] = graph.AddVertex (point.x, point.y);
       }
 
-      Leaf MakeLeaf (List<IPoint> corners, double x0, double x1) {
+      Leaf MakeLeaf (List<IPoint> corners, int x0, int x1) {
         var localVerts = new List<Vertex> ();
         for (var i = 0; i < corners.Count; ++i) {
           var u = corners[i];
@@ -304,7 +304,7 @@ namespace L1PathFinder {
         return new Leaf (localVerts);
       }
 
-      BucketInfo MakeBucket (List<IPoint> corners, double x) {
+      BucketInfo MakeBucket (List<IPoint> corners, int x) {
         //Split visible corners into 3 cases
         var left = new List<IPoint> ();
         var right = new List<IPoint> ();
@@ -320,7 +320,7 @@ namespace L1PathFinder {
         }
 
         //Add Steiner vertices if needed
-        IPoint addSteiner (double y, bool first) {
+        IPoint addSteiner (int y, bool first) {
           if (!geom.StabTile (x, y)) {
             for (var i = 0; i < on.Count; ++i) {
               if (on[i].x == x && on[i].y == y) {
@@ -385,7 +385,7 @@ namespace L1PathFinder {
 
       //Make tree
       geom = Geometry.CreateGeometry (grid);
-      INode MakeTree (List<IPoint> corners, double x0, double x1) {
+      INode MakeTree (List<IPoint> corners, int x0, int x1) {
         if (corners.Count == 0) {
           return null;
         }
@@ -432,7 +432,7 @@ namespace L1PathFinder {
         }
         return new Node (x, buckets, left, right);
       }
-      var root = MakeTree (geom.corners, double.NegativeInfinity, double.PositiveInfinity);
+      var root = MakeTree (geom.corners, int.MinValue, int.MaxValue);
 
       //Link edges
       for (var i = 0; i < edges.Count; ++i) {
