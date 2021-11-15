@@ -61,7 +61,7 @@ namespace L1PathFinder {
       return Math.Sign (a.y - b.y);
     }
     public static Geometry CreateGeometry (NDArray<int> grid) {
-      var loops = Contour.GetContours (grid.transpose (), false);
+      var loops = Contour.GetContours (grid.transpose (new int[]{1,0}), false);
 
       //Extract corners
       var corners = new List<IPoint> ();

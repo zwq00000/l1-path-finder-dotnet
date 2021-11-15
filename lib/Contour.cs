@@ -171,7 +171,7 @@ namespace L1PathFinder {
       hvertices.Sort (CompareVertex);
 
       //Extract vertical contours and vertices
-      var vcontours = GetParallelCountours (array.transpose (), true);
+      var vcontours = GetParallelCountours (array.transpose (new int[] { 1, 0 }), true);
       var vvertices = GetVertices (vcontours);
       vvertices.Sort (CompareVertex);
 

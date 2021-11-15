@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>l1_path_finder_dotnet</RootNamespace>
+    <RootNamespace>L1PathFinder</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
